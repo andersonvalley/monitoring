@@ -99,9 +99,13 @@ async function start() {
       const msg = event.message;
       const text = msg?.message?.trim();
       if (!text) return;
-      if (!isLead(text.toLowerCase())) return;
 
       const chat = await msg.getChat();
+      const chatNameDebug = chat?.title || chat?.username || 'ЛС/неизвестный чат';
+      console.log(`[DEBUG] new msg chat="${chatNameDebug}" out=${Boolean(msg.out)} text="${text.slice(0,120)}"`);
+
+      if (!isLead(text.toLowerCase())) return;
+
       const sender = await msg.getSender();
 
       const chatName = chat?.title || chat?.username || 'ЛС/неизвестный чат';
