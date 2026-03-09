@@ -72,8 +72,17 @@ const keywordPatterns = [
   /\b(?:во|в)\s+(?:вьетнаме|таиланде|бали|индонезии|турции).{0,30}(?:связь|интернет|сим|есим)\b/i,
 ];
 
+const keywordIncludes = [
+  'есим', 'симка', 'симку', 'симки', 'сим карт', 'сим-карт',
+  'связь', 'интернет', 'мобильный интернет', 'роуминг',
+  'тариф', 'тарифы', 'пакет', 'безлимит', 'гб', 'мб',
+  'где купить сим', 'где взять сим', 'какую сим', 'как подключить esim',
+];
+
 function isLead(text = '') {
-  return keywordPatterns.some((rx) => rx.test(text));
+  const t = text.toLowerCase();
+  if (keywordIncludes.some((k) => t.includes(k))) return true;
+  return keywordPatterns.some((rx) => rx.test(t));
 }
 
 function messageLink(chat, messageId) {
