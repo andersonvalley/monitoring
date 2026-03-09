@@ -126,7 +126,7 @@ async function start() {
     } catch (e) {
       console.error('Handler error:', e?.message || e);
     }
-  }, new NewMessage({}));
+  }, new NewMessage({ incoming: true, outgoing: true }));
 }
 
 start().catch((e) => {
